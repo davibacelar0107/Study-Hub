@@ -1,1 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study Hub | Repositório acadêmico de disciplinas</title>
+<meta name="description" content="Study Hub é um repositório acadêmico no GitHub que reúne o registro das disciplinas estudadas: Lógica de Programação, Banco de Dados, Engenharia de Software e outras.">
+<meta name="author" content="davibacelar0107">
+<meta name="theme-color" content="#080B12">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Study Hub | Repositório acadêmico de disciplinas">
+<meta property="og:description" content="Registro das disciplinas estudadas ao longo do curso, organizado em um repositório público no GitHub.">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23101D36'/%3E%3Crect x='12' y='12' width='24' height='40' fill='%232563EB'/%3E%3Crect x='40' y='12' width='12' height='24' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080B12; --navy:#101D36; --blue:#2563EB; --white:#FFFFFF; --gray:#A7B0C0;
+  --line:rgba(167,176,192,.22);
+  /* Fibonacci: 8 13 21 34 55 89 */
+  --s1:8px; --s2:13px; --s3:21px; --s4:34px; --s5:55px; --s6:89px;
+  --phi:1.618;
+  --display:"Sora","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
+  --radius:8px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:89px}
+body{margin:0;background:var(--bg);color:var(--white);font-family:var(--body);font-size:1.125rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:var(--white);text-underline-offset:4px;text-decoration-color:var(--blue);text-decoration-thickness:2px}
+a:hover{text-decoration-color:var(--white)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:var(--s2);top:-100px;background:var(--blue);color:var(--white);padding:var(--s1) var(--s3);z-index:100;text-decoration:none;border-radius:var(--radius)}
+.skip:focus{top:var(--s2)}
+.wrap{width:min(1120px,100% - 2*var(--s3));margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+h2{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.25rem;font-weight:500}
+p{margin:0}
+.muted{color:var(--gray)}
+section{padding-block:var(--s6)}
 
+/* Cabeçalho */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;min-height:55px;gap:var(--s3)}
+.brand{font-family:var(--display);font-weight:700;font-size:1.125rem;text-decoration:none;display:flex;align-items:center;gap:var(--s2)}
+.brand svg{width:21px;height:21px;flex:none}
+nav ul{display:flex;gap:var(--s4);list-style:none;margin:0;padding:0}
+nav a{color:var(--gray);text-decoration:none;font-size:1rem;padding:var(--s1) 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav a:hover,nav a[aria-current="true"]{color:var(--white);border-bottom-color:var(--blue)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--white);font:inherit;font-size:1rem;padding:var(--s1) var(--s2);border-radius:var(--radius);cursor:pointer}
+
+/* Hero */
+.hero{padding-block:var(--s6) var(--s6)}
+.hero-grid{display:grid;grid-template-columns:1fr calc(var(--phi) * 1fr);gap:var(--s5);align-items:center}
+.hero h1{font-size:clamp(2.5rem,6vw,3.4375rem);font-weight:700;letter-spacing:-.02em}
+.hero .lead{margin-top:var(--s3);color:var(--gray);max-width:34em}
+.actions{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:var(--s2) var(--s3);border-radius:var(--radius);font-weight:600;font-size:1rem;text-decoration:none;border:1px solid var(--blue);transition:background .2s,border-color .2s,transform .2s}
+.btn-primary{background:var(--blue);color:var(--white)}
+.btn-primary:hover{background:#1d4fc4;border-color:#1d4fc4}
+.btn-ghost{background:transparent;color:var(--white);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--white)}
+
+/* Retângulo áureo com a estrutura do README */
+.golden{aspect-ratio:1.618/1;background:var(--navy);border:1px solid var(--line);border-radius:var(--radius);display:grid;grid-template-columns:1fr calc(var(--phi) * 1fr);overflow:hidden}
+.golden-side{background:var(--blue);padding:var(--s3);display:flex;flex-direction:column;justify-content:space-between}
+.golden-side b{font-family:var(--display);font-size:1.25rem;line-height:1.2}
+.golden-side span{font-size:.9375rem}
+.golden-list{list-style:none;margin:0;padding:var(--s3);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s1)}
+.golden-list li{display:flex;justify-content:space-between;gap:var(--s2);border-bottom:1px solid var(--line);padding-bottom:var(--s1);font-size:.9375rem}
+.golden-list li:last-child{border-bottom:0;padding-bottom:0}
+.golden-list small{color:var(--gray);font-size:.875rem;white-space:nowrap}
+
+/* animação única de entrada do hero */
+@media (prefers-reduced-motion:no-preference){
+  .golden-side{animation:slide .9s cubic-bezier(.2,.7,.2,1) both}
+  .golden-list li{animation:fade .6s ease both}
+  .golden-list li:nth-child(2){animation-delay:.08s}.golden-list li:nth-child(3){animation-delay:.13s}
+  .golden-list li:nth-child(4){animation-delay:.21s}.golden-list li:nth-child(5){animation-delay:.34s}
+  .golden-list li:nth-child(6){animation-delay:.55s}
+}
+@keyframes slide{from{transform:translateX(-100%)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* Seções em proporção 1 : 1,618 */
+.split{display:grid;grid-template-columns:1fr calc(var(--phi) * 1fr);gap:var(--s5);align-items:start}
+.split > header p{margin-top:var(--s3);color:var(--gray)}
+.alt{background:var(--navy)}
+.alt .line-color{border-color:rgba(167,176,192,.3)}
+
+.about-text p + p{margin-top:var(--s3)}
+.note{margin-top:var(--s4);border-left:3px solid var(--blue);padding:var(--s1) var(--s3);color:var(--gray);font-size:1rem}
+
+/* Disciplinas */
+.subjects{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding:var(--s3) 0;font-family:var(--display);font-weight:500;font-size:1.125rem}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--gray);transition:transform .25s}
+details[open] summary::after{transform:rotate(45deg);color:var(--white)}
+.d-body{padding:0 0 var(--s3);color:var(--gray);max-width:42em}
+.d-body ul{margin:var(--s2) 0 0;padding-left:var(--s3)}
+.d-body li{margin-top:4px}
+.d-body li::marker{color:var(--blue)}
+
+/* Tecnologias */
+.tech{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(233px,1fr));gap:var(--s3)}
+.tech li{border:1px solid var(--line);border-radius:var(--radius);padding:var(--s3);background:var(--bg)}
+.tech strong{display:block;font-family:var(--display);font-weight:500;margin-bottom:var(--s1)}
+.tech span{color:var(--gray);font-size:1rem}
+
+/* Código-fonte */
+.links{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.links li{border-bottom:1px solid var(--line)}
+.links a{display:flex;justify-content:space-between;gap:var(--s3);align-items:baseline;padding:var(--s3) 0;text-decoration:none}
+.links a:hover strong{text-decoration:underline;text-decoration-color:var(--blue);text-decoration-thickness:2px;text-underline-offset:4px}
+.links strong{font-family:var(--display);font-weight:500}
+.links span{color:var(--gray);font-size:1rem;text-align:right}
+
+/* Rodapé */
+footer{border-top:1px solid var(--line);padding-block:var(--s4);color:var(--gray);font-size:1rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s2)}
+
+@media (max-width:860px){
+  section{padding-block:var(--s5)}
+  .hero{padding-block:var(--s5)}
+  .hero-grid,.split{grid-template-columns:1fr;gap:var(--s4)}
+  .menu-btn{display:inline-block}
+  nav{position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);display:none}
+  nav.open{display:block}
+  nav ul{flex-direction:column;gap:0;padding:var(--s1) var(--s3) var(--s3)}
+  nav a{display:block;padding:var(--s2) 0}
+  .links a{flex-direction:column;gap:4px}
+  .links span{text-align:left}
+}
+@media (max-width:480px){
+  .golden{aspect-ratio:auto;grid-template-columns:1fr}
+  .golden-side{gap:var(--s3)}
+  .golden-list{gap:var(--s2)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#inicio" aria-label="Study Hub, início">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="12" height="22" fill="#2563EB"/><rect x="15" y="1" width="8" height="13" fill="#FFFFFF"/></svg>
+      Study Hub
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav id="menu" aria-label="Navegação principal">
+      <ul>
+        <li><a href="#inicio">Início</a></li>
+        <li><a href="#projeto">Projeto</a></li>
+        <li><a href="#disciplinas">Disciplinas</a></li>
+        <li><a href="#tecnologias">Tecnologias</a></li>
+        <li><a href="#codigo">Código-fonte</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Study Hub</h1>
+      <p class="lead">Repositório acadêmico que registra as disciplinas estudadas ao longo do curso, com os temas vistos em cada uma. Faz parte do projeto da disciplina Bootcamp-I.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/davibacelar0107/Study-Hub" target="_blank" rel="noopener noreferrer">Ver repositório no GitHub</a>
+        <a class="btn btn-ghost" href="#disciplinas">Ver disciplinas</a>
+      </div>
+    </div>
+    <div class="golden" role="group" aria-label="Disciplinas registradas no README do repositório">
+      <div class="golden-side">
+        <b>README.md</b>
+        <span>6 disciplinas documentadas</span>
+      </div>
+      <ul class="golden-list">
+        <li>Lógica de Programação</li>
+        <li>Introdução à Computação</li>
+        <li>Bootcamp-I</li>
+        <li>Fundamentos da Engenharia</li>
+        <li>Banco de Dados I</li>
+        <li>Engenharia de Software</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="projeto" aria-labelledby="t-projeto">
+  <div class="wrap split">
+    <header>
+      <h2 id="t-projeto">Sobre o projeto</h2>
+    </header>
+    <div class="about-text">
+      <p>O Study Hub nasceu como um espaço para organizar o que é aprendido em cada matéria. O repositório descreve cada disciplina e lista os conteúdos vistos, funcionando como um índice de estudo.</p>
+      <p>Segundo o README, a disciplina Bootcamp-I apoia e orienta a realização do projeto. Nela são usadas ferramentas que auxiliam os estudos e que poderão ser atualizadas no futuro.</p>
+      <p class="note">Estado atual: o repositório contém um único arquivo, o README.md, e ainda não possui código de aplicação. Esta página apresenta o que está documentado nele e será mantida fiel ao conteúdo real do projeto.</p>
+    </div>
+  </div>
+</section>
+
+<section id="disciplinas" aria-labelledby="t-disc">
+  <div class="wrap split">
+    <header>
+      <h2 id="t-disc">Disciplinas registradas</h2>
+      <p>O conteúdo atual do repositório. Abra cada item para ver os temas listados no README.</p>
+    </header>
+    <div class="subjects">
+      <details>
+        <summary>Lógica de Programação</summary>
+        <div class="d-body">
+          <p>Conceitos e definições da lógica e sua aplicação.</p>
+          <ul>
+            <li>A lógica aplicada à programação</li>
+            <li>Linguagem natural, fluxograma e pseudocódigo</li>
+            <li>Portugol Webstudio</li>
+            <li>Linguagem C</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Introdução à Computação</summary>
+        <div class="d-body">
+          <p>Programação mais próxima da máquina e noções de hardware.</p>
+          <ul>
+            <li>Números binários</li>
+            <li>Princípios de organização de computadores</li>
+            <li>Software e sistema operacional</li>
+            <li>Introdução à pilha da rede</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Bootcamp-I</summary>
+        <div class="d-body">
+          <p>Disciplina que apoia e ensina a realização do projeto Study Hub, com o uso de ferramentas que auxiliam os estudos.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Fundamentos da Engenharia</summary>
+        <div class="d-body">
+          <p>Fundamentos das engenharias, incluindo a de software.</p>
+          <ul>
+            <li>Ciência dos Materiais, Química Básica e Ciência do Ambiente</li>
+            <li>Transferência de Calor e Massa</li>
+            <li>Mecânica dos Sólidos</li>
+            <li>Expressão Gráfica (CAD)</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Banco de Dados I</summary>
+        <div class="d-body">
+          <p>Conceitos e arquitetura de bancos de dados, modelagem relacional a partir de requisitos e consultas em SQL para definir, manipular e extrair dados.</p>
+          <ul>
+            <li>Introdução aos Sistemas de Banco de Dados</li>
+            <li>Projeto de Banco de Dados</li>
+            <li>Metodologia Entidade-Relacionamento (ER)</li>
+            <li>Normalização de dados</li>
+            <li>SQL básico</li>
+            <li>Modelagem multidimensional</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>Engenharia de Software</summary>
+        <div class="d-body">
+          <p>Conceitos de engenharia de software, com ênfase em qualidade e boas práticas de desenvolvimento.</p>
+          <ul>
+            <li>Desenvolver visão sistêmica dos conceitos da área</li>
+            <li>Compreender as etapas do processo de desenvolvimento</li>
+            <li>Compreender o papel do engenheiro de software</li>
+            <li>Desenvolver comunicação e redes colaborativas compatíveis com o exercício profissional</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="tecnologias" aria-labelledby="t-tec">
+  <div class="wrap">
+    <h2 id="t-tec">Tecnologias e ferramentas citadas</h2>
+    <p class="muted" style="margin:var(--s3) 0 var(--s4);max-width:42em">O repositório não contém código-fonte de aplicação. Esta lista reúne as linguagens, ferramentas e formatos mencionados no README e usados no próprio repositório.</p>
+    <ul class="tech">
+      <li><strong>Linguagem C</strong><span>Vista em Lógica de Programação.</span></li>
+      <li><strong>Portugol Webstudio</strong><span>Ferramenta usada em Lógica de Programação.</span></li>
+      <li><strong>SQL</strong><span>Consultas básicas em Banco de Dados I.</span></li>
+      <li><strong>Modelo Entidade-Relacionamento</strong><span>Metodologia de projeto de bancos de dados.</span></li>
+      <li><strong>CAD</strong><span>Expressão Gráfica, em Fundamentos da Engenharia.</span></li>
+      <li><strong>Markdown, Git e GitHub</strong><span>Formato do README e plataforma que hospeda o repositório.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="codigo" aria-labelledby="t-cod">
+  <div class="wrap split">
+    <header>
+      <h2 id="t-cod">Código-fonte</h2>
+      <p>Todo o material está em um repositório público no GitHub. Os links abaixo abrem páginas externas.</p>
+    </header>
+    <ul class="links">
+      <li><a href="https://github.com/davibacelar0107/Study-Hub" target="_blank" rel="noopener noreferrer"><strong>Repositório Study-Hub</strong><span>Página principal, branch main</span></a></li>
+      <li><a href="https://github.com/davibacelar0107/Study-Hub/blob/main/README.md" target="_blank" rel="noopener noreferrer"><strong>README.md</strong><span>Descrição das disciplinas</span></a></li>
+      <li><a href="https://github.com/davibacelar0107/Study-Hub/commits/main/" target="_blank" rel="noopener noreferrer"><strong>Histórico de commits</strong><span>Evolução do repositório</span></a></li>
+      <li><a href="https://github.com/davibacelar0107" target="_blank" rel="noopener noreferrer"><strong>Perfil davibacelar0107</strong><span>Autor no GitHub</span></a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>Study Hub, projeto acadêmico de davibacelar0107.</p>
+    <p>Página estática em HTML, CSS e JavaScript, <span id="year"></span>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('menuBtn'),menu=document.getElementById('menu');
+  function setMenu(open){menu.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));}
+  btn.addEventListener('click',function(){setMenu(!menu.classList.contains('open'));});
+  menu.addEventListener('click',function(e){if(e.target.tagName==='A')setMenu(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);btn.focus();}});
+
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  var links=[].slice.call(document.querySelectorAll('nav a[href^="#"]'));
+  if('IntersectionObserver' in window){
+    var map={};
+    links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(a){a.removeAttribute('aria-current');});
+          var a=map[en.target.id];if(a)a.setAttribute('aria-current','true');
+        }
+      });
+    },{rootMargin:'-40% 0px -55% 0px'});
+    Object.keys(map).forEach(function(id){var s=document.getElementById(id);if(s)io.observe(s);});
+  }
+})();
+</script>
+</body>
+</html>
