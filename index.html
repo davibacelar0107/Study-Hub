@@ -13,39 +13,44 @@
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23101D36'/%3E%3Crect x='12' y='12' width='24' height='40' fill='%232563EB'/%3E%3Crect x='40' y='12' width='12' height='24' fill='%23FFFFFF'/%3E%3C/svg%3E">
+<script>document.documentElement.className+=' js';</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<!-- Fontes carregadas sem bloquear a renderização: se falharem, a página usa as fontes do sistema -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap"></noscript>
 <style>
 :root{
   --bg:#080B12; --navy:#101D36; --blue:#2563EB; --white:#FFFFFF; --gray:#A7B0C0;
   --line:rgba(167,176,192,.22);
   /* Fibonacci: 8 13 21 34 55 89 */
   --s1:8px; --s2:13px; --s3:21px; --s4:34px; --s5:55px; --s6:89px;
+  /* Proporção áurea: número puro (aspect-ratio) e fração de coluna (grid). 'fr' não pode ficar dentro de calc(). */
   --phi:1.618;
+  --phi-fr:1.618fr;
   --display:"Sora","Segoe UI",system-ui,sans-serif;
   --body:"Source Sans 3","Segoe UI",system-ui,-apple-system,sans-serif;
   --radius:8px;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:89px}
-body{margin:0;background:var(--bg);color:var(--white);font-family:var(--body);font-size:1.125rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+html{background:#080B12;background:var(--bg);color:#FFFFFF;scroll-behavior:smooth;scroll-padding-top:89px}
+body{margin:0;background:#080B12;background:var(--bg);color:#FFFFFF;color:var(--white);font-family:var(--body);font-size:1.125rem;line-height:1.6;-webkit-font-smoothing:antialiased}
 img,svg{max-width:100%}
 a{color:var(--white);text-underline-offset:4px;text-decoration-color:var(--blue);text-decoration-thickness:2px}
 a:hover{text-decoration-color:var(--white)}
 :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
 .skip{position:absolute;left:var(--s2);top:-100px;background:var(--blue);color:var(--white);padding:var(--s1) var(--s3);z-index:100;text-decoration:none;border-radius:var(--radius)}
 .skip:focus{top:var(--s2)}
-.wrap{width:min(1120px,100% - 2*var(--s3));margin-inline:auto}
+.wrap{width:calc(100% - 2*var(--s3));max-width:1120px;margin-left:auto;margin-right:auto}
 h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
 h2{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.01em}
 h3{font-size:1.25rem;font-weight:500}
 p{margin:0}
 .muted{color:var(--gray)}
-section{padding-block:var(--s6)}
+section{padding-top:var(--s6);padding-bottom:var(--s6)}
 
 /* Cabeçalho */
-.site-header{position:sticky;top:0;z-index:50;background:rgba(8,11,18,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(8,11,18,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;min-height:55px;gap:var(--s3)}
 .brand{font-family:var(--display);font-weight:700;font-size:1.125rem;text-decoration:none;display:flex;align-items:center;gap:var(--s2)}
 .brand svg{width:21px;height:21px;flex:none}
@@ -55,26 +60,25 @@ nav a:hover,nav a[aria-current="true"]{color:var(--white);border-bottom-color:va
 .menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--white);font:inherit;font-size:1rem;padding:var(--s1) var(--s2);border-radius:var(--radius);cursor:pointer}
 
 /* Hero */
-.hero{padding-block:var(--s6) var(--s6)}
-.hero-grid{display:grid;grid-template-columns:1fr calc(var(--phi) * 1fr);gap:var(--s5);align-items:center}
+.hero{padding-top:var(--s6);padding-bottom:var(--s6)}
+.hero-grid{display:grid;grid-template-columns:1fr var(--phi-fr);gap:var(--s5);align-items:center}
 .hero h1{font-size:clamp(2.5rem,6vw,3.4375rem);font-weight:700;letter-spacing:-.02em}
 .hero .lead{margin-top:var(--s3);color:var(--gray);max-width:34em}
 .actions{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s4)}
-.btn{display:inline-flex;align-items:center;min-height:48px;padding:var(--s2) var(--s3);border-radius:var(--radius);font-weight:600;font-size:1rem;text-decoration:none;border:1px solid var(--blue);transition:background .2s,border-color .2s,transform .2s}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:var(--s2) var(--s3);border-radius:var(--radius);font-weight:600;font-size:1rem;text-decoration:none;border:1px solid var(--blue);transition:background .2s,border-color .2s}
 .btn-primary{background:var(--blue);color:var(--white)}
 .btn-primary:hover{background:#1d4fc4;border-color:#1d4fc4}
 .btn-ghost{background:transparent;color:var(--white);border-color:var(--line)}
 .btn-ghost:hover{border-color:var(--white)}
 
 /* Retângulo áureo com a estrutura do README */
-.golden{aspect-ratio:1.618/1;background:var(--navy);border:1px solid var(--line);border-radius:var(--radius);display:grid;grid-template-columns:1fr calc(var(--phi) * 1fr);overflow:hidden}
+.golden{min-height:233px;aspect-ratio:var(--phi)/1;background:var(--navy);border:1px solid var(--line);border-radius:var(--radius);display:grid;grid-template-columns:1fr var(--phi-fr);overflow:hidden}
 .golden-side{background:var(--blue);padding:var(--s3);display:flex;flex-direction:column;justify-content:space-between}
 .golden-side b{font-family:var(--display);font-size:1.25rem;line-height:1.2}
 .golden-side span{font-size:.9375rem}
 .golden-list{list-style:none;margin:0;padding:var(--s3);display:flex;flex-direction:column;justify-content:space-between;gap:var(--s1)}
 .golden-list li{display:flex;justify-content:space-between;gap:var(--s2);border-bottom:1px solid var(--line);padding-bottom:var(--s1);font-size:.9375rem}
 .golden-list li:last-child{border-bottom:0;padding-bottom:0}
-.golden-list small{color:var(--gray);font-size:.875rem;white-space:nowrap}
 
 /* animação única de entrada do hero */
 @media (prefers-reduced-motion:no-preference){
@@ -88,10 +92,9 @@ nav a:hover,nav a[aria-current="true"]{color:var(--white);border-bottom-color:va
 @keyframes fade{from{opacity:0}to{opacity:1}}
 
 /* Seções em proporção 1 : 1,618 */
-.split{display:grid;grid-template-columns:1fr calc(var(--phi) * 1fr);gap:var(--s5);align-items:start}
+.split{display:grid;grid-template-columns:1fr var(--phi-fr);gap:var(--s5);align-items:start}
 .split > header p{margin-top:var(--s3);color:var(--gray)}
 .alt{background:var(--navy)}
-.alt .line-color{border-color:rgba(167,176,192,.3)}
 
 .about-text p + p{margin-top:var(--s3)}
 .note{margin-top:var(--s4);border-left:3px solid var(--blue);padding:var(--s1) var(--s3);color:var(--gray);font-size:1rem}
@@ -123,18 +126,20 @@ details[open] summary::after{transform:rotate(45deg);color:var(--white)}
 .links span{color:var(--gray);font-size:1rem;text-align:right}
 
 /* Rodapé */
-footer{border-top:1px solid var(--line);padding-block:var(--s4);color:var(--gray);font-size:1rem}
+footer{border-top:1px solid var(--line);padding-top:var(--s4);padding-bottom:var(--s4);color:var(--gray);font-size:1rem}
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s2)}
 
 @media (max-width:860px){
-  section{padding-block:var(--s5)}
-  .hero{padding-block:var(--s5)}
+  section{padding-top:var(--s5);padding-bottom:var(--s5)}
+  .hero{padding-top:var(--s5);padding-bottom:var(--s5)}
   .hero-grid,.split{grid-template-columns:1fr;gap:var(--s4)}
-  .menu-btn{display:inline-block}
-  nav{position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line);display:none}
-  nav.open{display:block}
+  nav{position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--line)}
   nav ul{flex-direction:column;gap:0;padding:var(--s1) var(--s3) var(--s3)}
   nav a{display:block;padding:var(--s2) 0}
+  /* O menu só é recolhido se o JavaScript estiver ativo; sem JS, os links ficam visíveis */
+  .js .menu-btn{display:inline-block}
+  .js nav{display:none}
+  .js nav.open{display:block}
   .links a{flex-direction:column;gap:4px}
   .links span{text-align:left}
 }
@@ -158,7 +163,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);color:var(--gray
       <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="12" height="22" fill="#2563EB"/><rect x="15" y="1" width="8" height="13" fill="#FFFFFF"/></svg>
       Study Hub
     </a>
-    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Menu</button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
     <nav id="menu" aria-label="Navegação principal">
       <ul>
         <li><a href="#inicio">Início</a></li>
@@ -327,7 +332,7 @@ footer{border-top:1px solid var(--line);padding-block:var(--s4);color:var(--gray
 <footer>
   <div class="wrap foot">
     <p>Study Hub, projeto acadêmico de davibacelar0107.</p>
-    <p>Página estática em HTML, CSS e JavaScript, <span id="year"></span>.</p>
+    <p>Página estática em HTML, CSS e JavaScript, <span id="year">2026</span>.</p>
   </div>
 </footer>
 
